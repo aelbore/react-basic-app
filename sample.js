@@ -1,15 +1,12 @@
-class HelloWorld {
-  apply(compiler) {
+const sass = require('node-sass');
+const css = require('css');
 
-    compiler.plugin('emit', function(compilation, callback) {
-      console.log(compilation.chunks);
-      callback();
-    });
-
-    compiler.plugin("done", () => {
-      console.log("Hello world");
-  })
-}
+const transform = (source) => {
+  const res = sass.renderSync({ data: source, outputStyle: 'compressed' });
+  const result = res.css.toString('utf8')
+    .replace(/(\r\n|\n|\r)/gm, '')
+    .replace(/\t+/gm, '');
+  return `module.exports = '${result}'`;
 }
 
-module.exports = HelloWorld;
+module.exports = transform;

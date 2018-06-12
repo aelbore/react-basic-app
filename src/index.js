@@ -1,20 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-import { register } from 'web-react-components';
-
 import InlineCss from "react-inline-css";
 
-import * as styles from './index.scss';
+import { register } from 'web-react-components';
+import styles from './index.scss';
+import core from './hello.scss';
 
-const Index = () => {
-  
+const Index = () => {  
   return (
-      <InlineCss stylesheet={ `.title {
-        color: blue;
-        font-size: 24px;
-      }` }>
-        <div className="title">
+      <InlineCss stylesheet={styles + core}>
+        <div className='title'>
           Hello React!
         </div>
       </InlineCss>

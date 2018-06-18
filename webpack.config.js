@@ -1,40 +1,39 @@
 const path = require('path');
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
-  filename: "./index.html"
-});
-
-const miniCssPlugin = new MiniCssExtractPlugin({
-  filename: "[name].css",
-  chunkFilename: "[id].css"
+  filename: "./index.html",
+  alwaysWriteToDisk: true
 });
 
 module.exports = {
+  entry: [
+    './src/index.js'
+  ],
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: [
+          'babel-loader'
+        ]
       },
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },
       {
         test: /\.scss$/,
-        loader: path.resolve('sample.js')
+        use: [
+          path.resolve('inline-scss-loader.js')
+        ]
       }
     ]
   },
-  plugins: [ htmlPlugin, miniCssPlugin ]
+  plugins: [ htmlPlugin ]
 };

@@ -1,0 +1,9 @@
+:host {
+  --font-size: 20px;
+  --title-color: blue;
+}
+
+.title {
+  color: var(--title-color); 
+  font-size: var(--font-size);
+}
